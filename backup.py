@@ -28,7 +28,7 @@ if __name__ == '__main__':
         except (KeyboardInterrupt, SystemExit):
             raise
         except:
-            fails.append(path)
+            fails.append(os.path.basename(os.path.normpath(path)))
         
     if len(fails) > 0:
         notify('Git auto push', '{} failed.'.format(", ".join(fails)))
