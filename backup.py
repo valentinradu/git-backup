@@ -21,9 +21,10 @@ if __name__ == '__main__':
             if repo.bare:
                 continue
             
-            repo.git.add('--all')
-            repo.git.commit('-m', '[Backup Commit]', author='radu.v.valentin@gmail.com')
-            repo.git.push()
+            if repo.is_dirty() or len(repo.untracked_files) > 0:
+                repo.git.add('--all')
+                repo.git.commit('-m', '[Backup Commit]', author='radu.v.valentin@gmail.com')
+                repo.git.push()
         except (KeyboardInterrupt, SystemExit):
             raise
         except:
